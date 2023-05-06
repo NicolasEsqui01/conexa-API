@@ -1,0 +1,13 @@
+{
+    "singleQuote": true,
+    "quoteProps": "as-needed",
+    "bracketSpacing": true,
+    "overrides": [
+        {
+            "files": ["node_modules/**"]
+        },
+        {
+            "files": ["lib/**"]
+        }
+    ]
+}

@@ -1,0 +1,48 @@
+{
+  "name": "conexa-api",
+  "version": "1.0.0",
+  "description": "A single api of create user and filter",
+  "main": "./src/index.js",
+  "scripts": {
+    "babel-node": "babel-node --presets='@babel/preset-env'",
+    "dev": "nodemon --exec npm run babel-node -- ./src/www/www.js",
+    "build": "babel ./src -d lib",
+    "start": "node ./lib/index",
+    "prettier": "prettier --write ./src",
+    "lint": "npx eslint --fix ./src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NicolasEsqui01/conexa-API.git"
+  },
+  "keywords": [
+    "API"
+  ],
+  "author": "Nicolas Esquivel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NicolasEsqui01/conexa-API/issues"
+  },
+  "homepage": "https://github.com/NicolasEsqui01/conexa-API#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.21.5",
+    "@babel/core": "^7.21.8",
+    "@babel/node": "^7.20.7",
+    "@babel/plugin-proposal-optional-chaining": "^7.21.0",
+    "@babel/preset-env": "^7.21.5",
+    "dotenv": "^16.0.3",
+    "eslint": "^8.40.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^15.7.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "nodemon": "^2.0.22",
+    "prettier": "2.8.8"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.1.0",
+    "winston": "^3.8.2"
+  }
+}
