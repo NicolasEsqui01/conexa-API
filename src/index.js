@@ -1,8 +1,11 @@
-import express from 'express'
+import express from 'express';
+import userV1routes from './routes';
 
-const app = express()
+const app = express();
 
-app.use(express.urlencoded())
-app.use(express.json())
+app.use(express.urlencoded());
+app.use(express.json());
 
-export default app
+app.use('/api/v1', userV1routes);
+
+export default app;
