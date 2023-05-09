@@ -1,0 +1,40 @@
+{
+  "name": "microservice-business",
+  "version": "1.0.0",
+  "description": "Microservice",
+  "main": "index.js",
+  "scripts": {
+    "babel-node": "babel-node --presets='@babel/preset-env'",
+    "dev": "nodemon --exec npm run babel-node -- ./src/www/www.js",
+    "build": "babel ./src -d lib",
+    "start": "node ./lib/index",
+    "prettier": "prettier --write ./src",
+    "lint": "npx eslint --fix ./src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NicolasEsqui01/conexa-API.git"
+  },
+  "author": "Nicolas esquivel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NicolasEsqui01/conexa-API/issues"
+  },
+  "homepage": "https://github.com/NicolasEsqui01/conexa-API#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mongoose": "^7.1.0",
+    "winston": "^3.8.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.21.5",
+    "@babel/core": "^7.21.8",
+    "@babel/node": "^7.20.7",
+    "@babel/plugin-proposal-optional-chaining": "^7.21.0",
+    "@babel/preset-env": "^7.21.5",
+    "dotenv": "^16.0.3",
+    "nodemon": "^2.0.22",
+    "prettier": "^2.8.8"
+  }
+}

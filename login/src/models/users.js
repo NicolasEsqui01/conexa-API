@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import { hashSync } from 'bcrypt';
+import { hash } from 'bcrypt';
 import env from '../config/environment';
 
 const userSchema = new Schema(
@@ -10,8 +10,15 @@ const userSchema = new Schema(
   { timestamps: true }
 );
 
+userSchema.methods.toJSON = function () {
+  const user = this;
+  delete user._doc.password;
+  return user._doc;
+};
+
 userSchema.pre('save', async function (next) {
-  this.password = await hashSync(this.password, env.SALT);
+  this.password = await hash(this.password, env.SALT);
+  i;
   next();
 });
 
