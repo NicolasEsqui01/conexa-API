@@ -5,12 +5,10 @@ import {
   loginUser,
 } from '../controllers/users.controller';
 import { verifyToken } from '../middleware/auth';
-import { callInternal } from '../middleware/call';
 
 const router = Router();
 
-router.get('/', verifyToken, callInternal);
-router.get('/all', getAllUsers);
+router.get('/', verifyToken, getAllUsers);
 router.post('/', createUser);
 router.post('/login', loginUser);
 

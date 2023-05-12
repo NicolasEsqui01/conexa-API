@@ -1,16 +1,12 @@
 import userService from '../services/users.service';
-import logger from '../config/logger';
 
 const getAllUsers = async (req, res, next) => {
   try {
-    const { email, page, limit } = req.query;
+    const { email, page = 1, limit = 10 } = req.query;    
     const users = await userService.getAllUsers({ email, page, limit });
     res.status(200).json({ status: 'OK', data: users });
   } catch (err) {
-    res.status(err?.status || 500).json({
-      status: 'FAILED',
-      data: { error: err?.message || '' },
-    });
+    next(err);
   }
 };
 
@@ -20,10 +16,11 @@ const createUser = async (req, res, next) => {
   } = req;
 
   if (!email || !password) {
-    res.status(400).json({
-      status: 'FAILED',
-      data: { error: 'The keys email and password are required' },
-    });
+    const badRequestError = {
+      status: 'BAD_REQUEST',
+      message: 'The keys email and password are required for create a user',
+    };
+    next(badRequestError);
     return;
   }
 
@@ -35,11 +32,7 @@ const createUser = async (req, res, next) => {
     const createdUser = await userService.createUser(newUser);
     res.status(201).json({ status: 'OK', data: createdUser });
   } catch (err) {
-    console.error(err);
-    res.status(err?.status || 500).json({
-      status: 'INTERNAL_SERVER',
-      message: err?.message || 'There was an error in the created from user',
-    });
+    next(err);
   }
 };
 
@@ -47,10 +40,11 @@ const loginUser = async (req, res, next) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    res.status(400).json({
-      status: 'FAILED',
-      data: { error: 'The keys email and password are required' },
-    });
+    const error = {
+      status: 'BAD_REQUEST',
+      message: 'The keys email and password are required',
+    };
+    next(error);
     return;
   }
 
@@ -62,10 +56,7 @@ const loginUser = async (req, res, next) => {
     const loginUser = await userService.loginUser(user);
     res.status(200).json({ status: 'OK', data: loginUser });
   } catch (err) {
-    res.status(err?.status || 500).json({
-      status: 'FAILED',
-      message: err?.message || 'There was an error in the login from user',
-    });
+    next(err);
   }
 };
 

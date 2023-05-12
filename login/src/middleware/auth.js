@@ -14,14 +14,13 @@ export const decodeToken = function (token) {
 export const verifyToken = async function (req, res, next) {
   const token = req.headers.authorization || req.query.token;
 
-  if (!token) return next(new Error({ status: '', data: { error: '' } }));
+  if (!token) return next({ status: 'BAD_REQUEST', message: 'Need a token' });
 
-  const decoded = await jwt.verify(token, env.JWT_SECRET);
-  if (!decoded) {
-    return next(
-      new Error({ status: '', data: { error: decoded?.message || '' } })
-    );
+  try {
+    const decoded = await jwt.verify(token, env.JWT_SECRET);
+    req.user = decoded;
+    next();
+  } catch (err) {
+    next({ status: 'BAD_REQUEST', message: err?.message || '' })
   }
-  req.user = decoded;
-  next();
 };

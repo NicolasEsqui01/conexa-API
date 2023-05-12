@@ -1,10 +1,16 @@
+import axios from 'axios';
 import User from '../database/Users';
 import { v4 as uuid } from 'uuid';
 import { createToken } from '../middleware/auth';
+import env from '../config/environment';
 
 const getAllUsers = async ({ email, page, limit }) => {
   try {
-    const users = await User.getAllUsers({ email, page, limit });
+    let url = `${env.INTERNAL_URL}/api/v1/business?page=${page}&limit=${limit}`;
+    if (email) url += `&email=${email}`;
+    const {
+      data: { data: users },
+    } = await axios.get(url);
     return users;
   } catch (err) {
     throw err;

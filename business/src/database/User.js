@@ -9,7 +9,7 @@ const getAllUser = async ({ email, page, limit }) => {
         .skip((page - 1) * limit);
       return users;
     } catch (e) {
-      throw { status: 500, message: e?.message || e };
+      throw { status: 'INTERNAL_SERVER', message: e?.message || e };
     }
 };
 

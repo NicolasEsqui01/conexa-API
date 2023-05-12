@@ -18,7 +18,6 @@ userSchema.methods.toJSON = function () {
 
 userSchema.pre('save', async function (next) {
   this.password = await hash(this.password, env.SALT);
-  i;
   next();
 });
 
